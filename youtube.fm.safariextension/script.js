@@ -4,10 +4,15 @@
  * Contact: celsojuarez at gmail
  */
 function populateLinks() {
-	var songs = (document.querySelectorAll('td.subjectCell > div').length > 0) ? document.querySelectorAll('td.subjectCell > div') : document.querySelectorAll('td.subjectCell'),
+	var songsWithDiv = document.querySelectorAll('tbody td.subjectCell > div'),
+		songsNoDiv = document.querySelectorAll('tbody td.subjectCell'),
+		songs,
 		urlPath = document.location.pathname.split("/"),
 		i = 0,
 		artist = '';
+		songsWithDiv = Array.prototype.slice.call(songsWithDiv);
+		songsNoDiv = Array.prototype.slice.call(songsNoDiv);
+		songs = songsWithDiv.concat(songsNoDiv);
 	if (urlPath[1] === "music") {
 		artist = urlPath[2] + '+';
 	}
@@ -19,5 +24,4 @@ function populateLinks() {
 		songs[i].innerHTML = content;
 	}
 }
-
 populateLinks();
